@@ -1,0 +1,21 @@
+diff --git a/node_modules/react-native/ReactAndroid/build.gradle b/node_modules/react-native/ReactAndroid/build.gradle
+index 3be8b26..3f7bba8 100644
+--- a/node_modules/react-native/ReactAndroid/build.gradle
++++ b/node_modules/react-native/ReactAndroid/build.gradle
+@@ -61,7 +61,7 @@ task createNativeDepsDirectories {
+ }
+ 
+ task downloadBoost(dependsOn: createNativeDepsDirectories, type: Download) {
+-    src("https://boostorg.jfrog.io/artifactory/main/release/${BOOST_VERSION.replace("_", ".")}/source/boost_${BOOST_VERSION}.tar.gz")
++    src("https://archives.boost.io/release/${BOOST_VERSION.replace("_", ".")}/source/boost_${BOOST_VERSION}.tar.gz")
+     onlyIfNewer(true)
+     overwrite(false)
+     dest(new File(downloadsDir, "boost_${BOOST_VERSION}.tar.gz"))
+diff --git a/node_modules/react-native/scripts/.packager.bat b/node_modules/react-native/scripts/.packager.bat
+new file mode 100644
+index 0000000..e89260e
+--- /dev/null
++++ b/node_modules/react-native/scripts/.packager.bat
+@@ -0,0 +1 @@
++set RCT_METRO_PORT=8081
+\ No newline at end of file
