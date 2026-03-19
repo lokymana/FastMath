@@ -96,7 +96,7 @@ const ThirdPage = ({ route, navigation }) => {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#fff7f0' },
-  topBar: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', backgroundColor: '#e85d2a', paddingHorizontal: 14, paddingVertical: 12 },
+  topBar: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', backgroundColor: '#e85d2a', paddingHorizontal: 14, paddingVertical: 12, paddingTop: 18 },
   backButton: { width: 42, height: 42, borderRadius: 21, backgroundColor: 'rgba(255,250,245,0.2)', alignItems: 'center', justifyContent: 'center' },
   backIcon: { color: '#fffaf5', fontSize: 34, lineHeight: 34, marginTop: -2 },
   backSpacer: { width: 42, height: 42 },

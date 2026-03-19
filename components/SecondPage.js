@@ -87,14 +87,18 @@ const SecondPage = ({ route, navigation }) => {
       setTimeLeft((prev) => {
         if (prev <= 1) {
           clearInterval(timer);
-          finishGame().catch(() => {});
           return 0;
         }
         return prev - 1;
       });
     }, 1000);
     return () => clearInterval(timer);
-  }, [finishGame, isInfinite]);
+  }, [isInfinite]);
+
+  useEffect(() => {
+    if (isInfinite || timeLeft > 0) return;
+    finishGame().catch(() => {});
+  }, [finishGame, isInfinite, timeLeft]);
 
   const modeText = useMemo(() => {
     const opText = operationMode === 'all' ? t('Tüm işlemler', 'All operations') : OP_LABELS[operationMode];
@@ -137,6 +141,7 @@ const SecondPage = ({ route, navigation }) => {
           <Text style={styles.modeText}>{modeText}</Text>
           <View style={styles.scoreRow}>
             <View style={styles.statPill}><Text style={styles.statLabel}>{t('Skor', 'Score')}</Text><Text style={styles.statValue}>{score}</Text></View>
+            <View style={styles.statPill}><Text style={styles.statLabel}>{t('Yanlış', 'Wrong')}</Text><Text style={styles.statValue}>{wrongCount}</Text></View>
             <View style={styles.statPill}><Text style={styles.statLabel}>{t('Seri', 'Streak')}</Text><Text style={styles.statValue}>{streak}</Text></View>
             <View style={styles.statPill}><Text style={styles.statLabel}>{t('Rekor', 'Best')}</Text><Text style={styles.statValue}>{highScore}</Text></View>
           </View>
@@ -169,9 +174,9 @@ const styles = StyleSheet.create({
   topCard: { width: '100%', backgroundColor: palette.card, borderRadius: 28, padding: 18, marginBottom: 16 },
   modeText: { fontSize: 18, fontWeight: '800', color: palette.text, textAlign: 'center', marginBottom: 14 },
   scoreRow: { flexDirection: 'row', justifyContent: 'space-between' },
-  statPill: { flex: 1, backgroundColor: '#fffaf5', borderRadius: 18, paddingVertical: 10, marginHorizontal: 4, alignItems: 'center' },
-  statLabel: { fontSize: 12, color: palette.muted, fontWeight: '700' },
-  statValue: { fontSize: 22, color: palette.text, fontWeight: '900', marginTop: 4 },
+  statPill: { flex: 1, backgroundColor: '#fffaf5', borderRadius: 18, paddingVertical: 10, marginHorizontal: 3, alignItems: 'center' },
+  statLabel: { fontSize: 11, color: palette.muted, fontWeight: '700' },
+  statValue: { fontSize: 20, color: palette.text, fontWeight: '900', marginTop: 4 },
   questionCard: { width: '100%', backgroundColor: '#fffaf5', borderRadius: 32, paddingVertical: 24, paddingHorizontal: 18, alignItems: 'center', marginBottom: 18, borderWidth: 1, borderColor: palette.border },
   questionRow: { width: '100%', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginBottom: 18 },
   numberText: { fontSize: 52, fontWeight: '900', color: palette.text, marginHorizontal: 12 },
